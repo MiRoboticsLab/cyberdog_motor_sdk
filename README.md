@@ -40,7 +40,7 @@ $ ssh root@192.168.55.233 #登录运动控制板
 $ ssh root@192.168.55.233 #登录运动控制板
 root@TinaLinux:~# cd /robot
 root@TinaLinux:~# ./initialize.sh #拷贝出厂代码到可读写的开发区（/mnt/UDISK/robot-software），切换到开发者模式，仅需执行一次
-root@TinaLinux:~# vi /mnt/UDISK/robot-software/config/user_code_ctrl_mod.txt #切换mode:1(0:默认模式，1用户代码控制电机模式),重启机器人生效
+root@TinaLinux:~# vi /mnt/UDISK/robot-software/config/user_code_ctrl_mode.txt #切换mode:1(0:默认模式，1用户代码控制电机模式),重启机器人生效
 ```
 ### 编译及部署
 
@@ -107,9 +107,9 @@ root@TinaLinux:~# ./Example_MotorCtrl  #通过“nohup ./Example_MotorCtrl &”�
 注：为了避免通信超时导致危险，报err_flag: 0x02 communicate lost over 500ms后先排除故障,关闭Example_MotorCtrl例程进程,再重启运控程序或者直接重启运控板才能清除错误.
 ```
 # 重启运控程序:
-ssh root@192.168.55.233 "ps | grep -E 'Example_MotorCtrl' | grep -v grep | awk '{print \$1}' | xargs kill -9" #需先于主进程暂停，避免急停
-ssh root@192.168.55.233 "ps | grep -E 'manager|ctrl|imu_online' | grep -v grep | awk '{print \$1}' | xargs kill -9"
-ssh root@192.168.55.233 "export LD_LIBRARY_PATH=/mnt/UDISK/robot-software/build;/mnt/UDISK/manager /mnt/UDISK/ >> /mnt/UDISK/manager_log/manager.log 2>&1 &"
+$ ssh root@192.168.55.233 "ps | grep -E 'Example_MotorCtrl' | grep -v grep | awk '{print \$1}' | xargs kill -9" #需先于主进程暂停，避免急停
+$ ssh root@192.168.55.233 "ps | grep -E 'manager|ctrl|imu_online' | grep -v grep | awk '{print \$1}' | xargs kill -9"
+$ ssh root@192.168.55.233 "export LD_LIBRARY_PATH=/mnt/UDISK/robot-software/build;/mnt/UDISK/manager /mnt/UDISK/ >> /mnt/UDISK/manager_log/manager.log 2>&1 &"
 # 重启运控板系统:
-ssh root@192.168.55.233 "reboot"
+$ ssh root@192.168.55.233 "reboot"
 ```
