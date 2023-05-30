@@ -19,5 +19,5 @@ target_link_libraries(cyber_dog_motor_sdk
 )
 
 # compile use code
-add_executable(Example_MotorCtrl src/Example_MotorCtrl.cpp)
-target_link_libraries(Example_MotorCtrl cyber_dog_motor_sdk)
+add_executable(example_motor_ctrl src/example_motor_ctrl.cpp)
+target_link_libraries(example_motor_ctrl cyber_dog_motor_sdk)
